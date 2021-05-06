@@ -1,0 +1,21 @@
+[
+ {
+ 	"id" : "950804sy",
+ 	"name" : "김수연",
+ 	"email" : "950804sy@naver.com",
+ 	"password" : "ssafy"
+ },
+ {
+ 	"id" : "lukigreen",
+ 	"name" : "양동혁",
+ 	"email" : "lukigreen@naver.com",
+ 	"password" : "1234"
+ },
+ {
+ 	"id" : "1",
+ 	"name" : "양동혁",
+ 	"email" : "lukigreen@ssafy.com",
+ 	"password" : "1"
+ }
+]
+
