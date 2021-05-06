@@ -1,4 +1,4 @@
-package com.ssafy.controller;
+package com.ssafy.house.controller;
 
 import java.io.IOException;
 import java.util.List;
