@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.house.dao.MemberDao;
-import com.ssafy.house.dao.MemberDaoImpl;
 import com.ssafy.house.dto.MemberDto;
 
 @Service
@@ -20,34 +20,35 @@ private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.cl
 	@Autowired
 	private MemberDao dao;
 	
+	@Transactional
 	@Override
 	public MemberDto login(String userid, String userpwd) throws Exception {
-		MemberDao dao = new MemberDaoImpl();
 		return dao.login(userid, userpwd);
 	}
 	
+	@Transactional
 	@Override
 	public void join(String userid, String userpwd, String name, String email) throws Exception {
-		MemberDao dao = new MemberDaoImpl();
 		dao.join(userid, userpwd, name, email);
 	}
 	
+	@Transactional
 	@Override
 	public List<MemberDto> listMember() throws Exception {
-		MemberDao dao = new MemberDaoImpl();
+
 		return dao.listMember();
 	}
 	
+	@Transactional
 	@Override
 	public void delete(String userid) throws Exception {
-		MemberDao dao = new MemberDaoImpl();
 		dao.deleteMember(userid);
 		
 	}
 	
+	@Transactional
 	@Override
 	public void update(String userid, String userpwd, String name, String email) throws Exception {
-		MemberDao dao = new MemberDaoImpl();
 		dao.updateMember(userid, userpwd, name, email);
 	}
 }

@@ -3,14 +3,13 @@ package com.ssafy.house.service;
 import java.sql.Connection;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.house.dao.HouseDao;
-import com.ssafy.house.dao.HouseDaoImpl;
 import com.ssafy.house.dto.HouseDto;
 import com.ssafy.house.dto.PageBean;
 import com.ssafy.house.dto.PostDto;
@@ -25,6 +24,7 @@ public class HouseServiceImpl implements HouseService {
 	@Autowired
 	private HouseDao dao;
 	
+	@Transactional
 	public List<HouseDto> searchAll(PageBean bean) {
 		Connection conn = null;
 		try {
@@ -37,7 +37,8 @@ public class HouseServiceImpl implements HouseService {
 		}
 		return null;
 	}
-
+	
+	@Transactional
 	public List<PostDto> searchPost() {
 		Connection conn = null;
 		try {
