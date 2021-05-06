@@ -3,5 +3,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.house.dao.MemberDao">
-		
+		<!-- <select id="userList" resultType="memberDto">
+		select userid, userpwd, username, email, address, date_format(joindate, '%y.%m.%d') joindate
+		from ssafy_member
+		order by joindate desc;
+		</select> -->
 </mapper>

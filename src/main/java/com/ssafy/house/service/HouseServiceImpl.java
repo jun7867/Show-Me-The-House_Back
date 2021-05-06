@@ -19,8 +19,7 @@ import com.ssafy.util.DBUtil;
 @Service
 public class HouseServiceImpl implements HouseService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HouseServiceImpl.class);
-	
+
 	@Autowired
 	private HouseDao dao;
 	
