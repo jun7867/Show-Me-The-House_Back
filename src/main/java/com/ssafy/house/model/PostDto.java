@@ -1,4 +1,4 @@
-package com.ssafy.house.dto;
+package com.ssafy.house.model;
 
 public class PostDto {
 	private int no;

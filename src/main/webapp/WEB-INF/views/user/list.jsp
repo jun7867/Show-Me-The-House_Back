@@ -49,7 +49,6 @@
 				"userid" : $("#userid").val(), 
 				"userpwd" : $("#userpwd").val(), 
 				"email" : $("#email").val(), 
-				"address" : $("#address").val()
 			   });
 			$.ajax({
 				url:'${root}/admin/user',  
@@ -62,7 +61,6 @@
 					$("#userid").val('');
 					$("#userpwd").val('');
 					$("#email").val('');
-					$("#address").val('');
 					$("#userRegModal").modal("hide");
 					makeList(users);
 				},
@@ -84,7 +82,6 @@
 					$("#vname").text(user.username);
 					$("#vemail").text(user.email);
 					$("#vaddress").text(user.address);
-					$("#vjoindate").text(user.joindate);
 					$("#userViewModal").modal();
 				},
 				error:function(xhr,status,msg){
@@ -183,8 +180,6 @@
 				<td>${'${user.userpwd}'}</td>
 				<td>${'${user.username}'}</td>
 				<td>${'${user.email}'}</td>
-				<td>${'${user.address}'}</td>
-				<td>${'${user.joindate}'}</td>
 				<td>
 					<button type="button" class="modiBtn btn btn-outline-primary btn-sm">수정</button>
 					<button type="button" class="delBtn btn btn-outline-danger btn-sm">삭제</button>
@@ -195,8 +190,7 @@
 				<td><input type="text" name="userpwd" id="userpwd${'${user.userid}'}" value="${'${user.userpwd}'}"></td>
 				<td>${'${user.username}'}</td>
 				<td><input type="text" name="email" id="email${'${user.userid}'}" value="${'${user.email}'}"></td>
-				<td><input type="text" name="address" id="address${'${user.userid}'}" value="${'${user.address}'}"></td>
-				<td>${'${user.joindate}'}</td>
+				
 				<td>
 					<button type="button" class="modifyBtn btn btn-primary btn-sm">수정</button>
 					<button type="button" class="cancelBtn btn btn-danger btn-sm">취소</button>
@@ -234,8 +228,6 @@
 	        	<th class="text-center">비밀번호</th>
 	        	<th class="text-center">이름</th>
 	        	<th class="text-center">이메일</th>
-	        	<th class="text-center">주소</th>
-	        	<th class="text-center">가입일</th>
 	        	<th class="text-center">수정/삭제</th>
 	      	</tr>
     	</thead>
@@ -274,10 +266,7 @@
 				<label for="email">이메일</label><br>
 				<input type="text" class="form-control" id="email" name="email" placeholder="">
 			</div>
-			<div class="form-group" align="left">
-				<label for="">주소</label>
-				<input type="text" class="form-control" id="address" name="address" placeholder="">
-			</div>
+			
 			<div class="form-group" align="center">
 				<button type="button" class="btn btn-primary" id="registerBtn">회원가입</button>
 				<button type="reset" class="btn btn-warning">초기화</button>
@@ -318,13 +307,9 @@
             <tr>
             	<th class="text-center">이메일</th>
                 <td class="text-left" id="vemail"></td>
-                <th class="text-center">가입일</th>
-                <td class="text-left" id="vjoindate"></td>
+                
             </tr>
-            <tr>
-                <th class="text-center">주소</th>
-                <td class="text-left" colspan="3" id="vaddress"></td>
-            </tr>
+      
             </tbody>
         </table>
       </div>

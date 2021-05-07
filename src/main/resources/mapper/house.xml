@@ -2,6 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.house.dao.HouseDao">
+<mapper namespace="com.ssafy.house.model.mapper.HouseDao">
+	<select id="getHouse" parameterType="int" resultType="houseDto">
+		select * from housedeal
+		where no = #{no}
+	</select>
+	
+	<select id="listHouse" parameterType="map" resultType="houseDto">
+		select * from housedeal
+		<where>
+			<if test="key !='all' and word!=null and word!='' ">
+				<choose>
+					<when test="key=='AptName'"> 
+						AptName like concat('%',#{word},'%')
+					</when>
+					<otherwise>
+						dong like concat('%',#{word},'%')
+					</otherwise>
+				</choose>
+			
+			</if>
+		</where>
+		order by no desc
+		limit #{start}, #{spp}
+	</select>
+	
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		select count(*) from housedeal
+		<where>
+			<if test="key !='all' and word!=null and word!='' ">
+				<choose>
+					<when test="key=='AptName'"> 
+						AptName like concat('%',#{word},'%')
+					</when>
+					<otherwise>
+						dong like concat('%',#{word},'%')
+					</otherwise>
+				</choose>
+			
+			</if>
+		</where>
 		
+	</select>
+	
 </mapper>

@@ -44,7 +44,7 @@
 				<li class="nav-item"><a class="nav-link" href="${root}/">공지사항</a>
 				</li>
 				<li class="nav-item"><a class="nav-link"
-					href="${root}/">주택 실거래</a></li>
+					href="${root}/house/list?pg=1&key=&word=">주택 실거래</a></li>
 				<li class="nav-item"><a class="nav-link" href="${root}/">주변
 						탐방</a></li>
 				<li class="nav-item"><a class="nav-link" href="${root}/">관심
@@ -53,18 +53,19 @@
 					data-toggle="modal" data-target="#favoriteAdd">관심 지역 등록</a></li>
 			</ul>
 		</div>
+		
 		<div class="collapse navbar-collapse">
 			<ul class="navbar-nav ml-auto">
 				<c:choose>
 					<c:when test="${empty userinfo}">
 						<li class="nav-item"><a class="nav-link"
-							href="${root}/" id="login">로그인</a></li>
+							href="${root}/user/login" id="login">로그인</a></li>
 						<li class="nav-item" id="signUp"><a class="nav-link"
 							href="${root}/mvsignup">회원가입</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item" id="logout"><a class="nav-link"
-							href="${root}/">로그아웃</a></li>
+							href="${root}/user/logout">로그아웃</a></li>
 						<li class="nav-item" id="mypage"><a class="nav-link"
 							href="${root}/">마이 페이지</a></li>
 					</c:otherwise>

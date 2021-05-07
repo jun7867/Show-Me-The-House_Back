@@ -1,8 +1,8 @@
-package com.ssafy.house.service;
+package com.ssafy.house.model.service;
 
 import java.util.List;
 
-import com.ssafy.house.dto.FavoriteDto;
+import com.ssafy.house.model.FavoriteDto;
 
 
 public interface FavoriteService {

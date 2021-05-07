@@ -1,17 +1,29 @@
 package com.ssafy.house.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ssafy.house.service.HouseService;
+import com.ssafy.house.model.HouseDto;
+import com.ssafy.house.model.PageBean;
+import com.ssafy.house.model.service.HouseService;
+import com.ssafy.util.PageNavigation;
 
 
 @Controller
+@RestController
+@RequestMapping("/house")
+@CrossOrigin("*")
 public class HouseController {
 	
 	@Autowired
@@ -25,16 +37,36 @@ public class HouseController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(@RequestParam Map<String, String> map, Model model) {
+		String spp = map.get("spp");
+		map.put("spp", spp != null ? spp : "10");//sizePerPage
+		try {
+			List<HouseDto> list = houseService.listHouse(map);
+			PageNavigation pageNavigation = houseService.makePageNavigation(map);
+			model.addAttribute("articles", list);
+			model.addAttribute("navigation", pageNavigation);
+			return "house/housedeal";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "집목록을 얻어오는 중 문제가 발생했습니다.");
+			return "error/error";
+		}
+	}
 	
-//	@GetMapping("listBook.do")
-//	public String listBook(Model model) {
-//		model.addAttribute("list", houseService.searchAll());
-//		return "book/listBook";
+//	@RequestMapping(value = "/housedeal", method = RequestMethod.GET)
+//	public String housedeal() {
+//		return "house/housedeal";
 //	}
-//	
-//	@GetMapping("searchBook.do")
-//	public String searchBook(Model model, String isbn) {
-//		model.addAttribute("book", houseService.search(isbn));
+//	@GetMapping("listHouse")
+//	public String listBook(Model model,@ModelAttribute("bean") PageBean bean) {
+//		model.addAttribute("list", houseService.searchAll(bean));
+//		return "house/housedeal";
+//	}
+	
+//	@GetMapping("searchHouse")
+//	public String searchBook(Model model, int no) {
+//		model.addAttribute("house", houseService.search(no));
 //		return "book/searchBook";
 //	}
 //	

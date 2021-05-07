@@ -1,4 +1,4 @@
-package com.ssafy.house.dto;
+package com.ssafy.house.model;
 
 /** UI 화면 페이지에 대한 정보를 표시하는 클래스 */
 public class PageBean {
