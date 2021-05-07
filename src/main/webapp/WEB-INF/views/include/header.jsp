@@ -44,7 +44,7 @@
 				<li class="nav-item"><a class="nav-link" href="${root}/">공지사항</a>
 				</li>
 				<li class="nav-item"><a class="nav-link"
-					href="${root}/house/list?pg=1&key=&word=">주택 실거래</a></li>
+					href="${root}/room/list?pg=1&key=&word=">주택 실거래</a></li>
 				<li class="nav-item"><a class="nav-link" href="${root}/">주변
 						탐방</a></li>
 				<li class="nav-item"><a class="nav-link" href="${root}/">관심

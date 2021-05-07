@@ -27,8 +27,8 @@ public class HouseServiceImpl implements HouseService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Autowired
-	private HouseDao dao;
+//	@Autowired
+//	private HouseDao dao;
 	
 	@Transactional
 	@Override

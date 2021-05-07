@@ -21,9 +21,7 @@ import com.ssafy.util.PageNavigation;
 
 
 @Controller
-@RestController
-@RequestMapping("/house")
-@CrossOrigin("*")
+@RequestMapping("/room")
 public class HouseController {
 	
 	@Autowired
@@ -44,9 +42,10 @@ public class HouseController {
 		try {
 			List<HouseDto> list = houseService.listHouse(map);
 			PageNavigation pageNavigation = houseService.makePageNavigation(map);
-			model.addAttribute("articles", list);
+			model.addAttribute("houses", list);
 			model.addAttribute("navigation", pageNavigation);
-			return "house/housedeal";
+			System.out.println("listlistlist houselist!!!!!!!!!!!");
+			return "/house/housedeal";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "집목록을 얻어오는 중 문제가 발생했습니다.");
