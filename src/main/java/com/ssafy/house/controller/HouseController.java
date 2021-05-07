@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,16 @@ public class HouseController {
 			model.addAttribute("msg", "집목록을 얻어오는 중 문제가 발생했습니다.");
 			return "error/error";
 		}
+	}
+	
+	@GetMapping("search")
+	public String search(Model model,int no) {
+		try {
+			model.addAttribute("house",houseService.getHouse(no));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/house/detail";
 	}
 	
 //	@RequestMapping(value = "/housedeal", method = RequestMethod.GET)

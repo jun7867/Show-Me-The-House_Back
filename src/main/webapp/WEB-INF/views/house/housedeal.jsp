@@ -63,6 +63,7 @@
 
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<!-- Page Header -->
 	<header class="masthead"
 		style="background-image: url('img/mainhome.jpeg')">
@@ -202,8 +203,8 @@
 	    	<c:otherwise>
 	    		<c:forEach var="housedeal" items="${houses}">
 	    			<tr>
-	    			<td>${housedeal.no} ${housedeal.aptName}</td>
-	    			<td><a href="${root}/room/list?&no=${housedeal.no}">${housedeal.dong}</a></td>
+	    			<td><a href="${root}/room/search?&no=${housedeal.no}">${housedeal.no}</a> ${housedeal.aptName}</td>
+	    			<td>${housedeal.dong}</a></td>
 	    			<td>${housedeal.jibun}</td>
 	    		</c:forEach>
 	    	</c:otherwise>

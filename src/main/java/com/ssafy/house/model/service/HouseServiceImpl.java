@@ -63,6 +63,7 @@ public class HouseServiceImpl implements HouseService {
 		pageNavigation.makeNavigator();
 		return pageNavigation;
 	}
+	
 	@Override
 	public HouseDto getHouse(int no) throws Exception {
 		return sqlSession.getMapper(HouseDao.class).getHouse(no);

@@ -28,6 +28,28 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() {
+		return "user/join";
+	}
+	
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	public String join(MemberDto memberDto, Model model, HttpSession session) {
+		if(memberDto != null) {
+			try {
+				userService.join(memberDto);
+				return "/index";
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("msg", "글작성중 문제가 발생했습니다.");
+				return "error/error";
+			}
+		} else {
+			model.addAttribute("msg", "로그인 후 사용 가능한 페이지입니다.");
+			return "error/error";
+		}
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
 		try {

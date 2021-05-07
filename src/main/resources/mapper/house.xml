@@ -23,7 +23,7 @@
 			
 			</if>
 		</where>
-		order by no desc
+		order by no
 		limit #{start}, #{spp}
 	</select>
 	

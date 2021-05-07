@@ -52,4 +52,13 @@ public class LoginServiceImpl implements LoginService {
 	public int userDelete(String userid) {
 		return sqlSession.getMapper(MemberDao.class).userDelete(userid);
 	}
+	
+	
+	@Override
+	public void join(MemberDto memberDto) throws Exception {
+		if(memberDto.getUserid() == null || memberDto.getUserpwd() == null) {
+			throw new Exception();
+		}
+		sqlSession.getMapper(MemberDao.class).userRegister(memberDto);
+	}
 }

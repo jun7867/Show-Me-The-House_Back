@@ -61,7 +61,7 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${root}/user/login" id="login">로그인</a></li>
 						<li class="nav-item" id="signUp"><a class="nav-link"
-							href="${root}/mvsignup">회원가입</a></li>
+							href="${root}/user/join">회원가입</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item" id="logout"><a class="nav-link"
