@@ -41,7 +41,7 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="${root}/">해피하우스</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="${root}/">공지사항</a>
+				<li class="nav-item"><a class="nav-link" href="${root}/qna/qna">공지사항</a>
 				</li>
 				<li class="nav-item"><a class="nav-link"
 					href="${root}/room/list?pg=1&key=&word=">주택 실거래</a></li>

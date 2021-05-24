@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.house.model.mapper.MapDao">
+
+	<select id="selectSido" resultType="sidogugundongdto">
+		select left(sido_code,2) sidoCode, sido_name sidoName
+		from sidocode
+		order by sidoCode;
+	</select>
+	
+	<select id="selectGugun" parameterType="String" resultType="sidogugundongdto">
+		select left(gugun_code,5) gugunCode, gugun_name gugunName
+		from guguncode
+		where left(gugun_code,2) = #{sidoCode}
+		order by gugunName;
+	</select>
+	
+	<select id="selectDong" parameterType="String" resultType="sidogugundongdto">
+		select right(dongcode,5) dongCode, dong dongName
+		from dongcode
+		where left(dongcode,5) = #{gugunCode}
+		order by dongName;
+	</select>
+	
+	<select id="selectSidoName" parameterType="String" resultType="String">
+		select sido_name sidoName
+		from sidocode
+		where left(sido_code,2) = #{selectSido}
+	</select>
+	
+	<select id="selectGugunName" parameterType="String" resultType="String">
+		select gugun_name gugunName
+		from guguncode
+		where left(gugun_code,5) = #{selectGugun}
+	</select>
+	<select id="selectDongName" parameterType="String" resultType="String">
+		select dong dongName
+		from dongcode
+		where right(dongcode,5) = #{selectDong}
+	</select>
+	
+	<select id="selectSiCode" parameterType="String" resultType="String">
+		select left(sido_code,2)
+		from sidocode
+		where sido_name like #{siName};
+	</select>
+	
+	<select id="selectGugunCode" parameterType="String" resultType="String">
+		select left(gugun_code,5)
+		from guguncode
+		where gugun_name like #{gugunName} and left(gugun_code,2)= #{sidoCode} ;
+	</select>
+</mapper>

@@ -3,12 +3,17 @@ package com.ssafy.house.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,103 +22,50 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ssafy.house.model.HouseDto;
 import com.ssafy.house.model.PageBean;
+import com.ssafy.house.model.SidoGugunDongDto;
 import com.ssafy.house.model.service.HouseService;
 import com.ssafy.util.PageNavigation;
 
+import io.swagger.annotations.ApiOperation;
 
-@Controller
-@RequestMapping("/room")
+@CrossOrigin(origins = { "*" }, maxAge = 6000)
+@RestController
+@RequestMapping("/api/room")
 public class HouseController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HouseController.class);
+	private static final String SUCCESS = "success";
+	private static final String FAIL = "fail";
 	
 	@Autowired
 	private HouseService houseService;
 	
-	@ExceptionHandler
-	public ModelAndView handler(Exception e) {
-		ModelAndView mav = new ModelAndView("/error");
-		mav.addObject("msg", e.getMessage());
-		e.printStackTrace();
-		return mav;
+	
+	@ApiOperation(value = "모든 아파트 정보를 반환한다.", response = List.class)
+	@GetMapping(value = "/apt/list")
+	public ResponseEntity<List<HouseDto>> getHouseList() throws Exception{
+		return new ResponseEntity<List<HouseDto>>(houseService.getHouseList(),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(@RequestParam Map<String, String> map, Model model) {
-		String spp = map.get("spp");
-		map.put("spp", spp != null ? spp : "10");//sizePerPage
-		try {
-			List<HouseDto> list = houseService.listHouse(map);
-			PageNavigation pageNavigation = houseService.makePageNavigation(map);
-			model.addAttribute("houses", list);
-			model.addAttribute("navigation", pageNavigation);
-			System.out.println("listlistlist houselist!!!!!!!!!!!");
-			return "/house/housedeal";
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", "집목록을 얻어오는 중 문제가 발생했습니다.");
-			return "error/error";
-		}
+	// 아파트 이름에 일치하는 아파트 정보 리스트
+	@ApiOperation(value = "아파트 이름과 일치하는 아파트 정보 리스트를 반환한다.", response = List.class)
+	@RequestMapping(value = "/apt/aptName/{aptName}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	public List<HouseDto> getHouseAptNameList(@PathVariable("aptName") String aptName) throws Exception{
+		return houseService.getHouseAptNameList(aptName);
 	}
 	
-	@GetMapping("search")
-	public String search(Model model,int no) {
-		try {
-			model.addAttribute("house",houseService.getHouse(no));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "/house/detail";
+	// 아파트 이름에 일치하는 아파트 정보 리스트
+	@ApiOperation(value = "동 이름과 일치하는 아파트 정보 리스트를 반환한다.", response = List.class)
+	@RequestMapping(value = "/apt/dong/{dong}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	public List<HouseDto> getHouseDongList(@PathVariable("dong") String dong) throws Exception{
+		return houseService.getHouseDongList(dong);
 	}
 	
-//	@RequestMapping(value = "/housedeal", method = RequestMethod.GET)
-//	public String housedeal() {
-//		return "house/housedeal";
-//	}
-//	@GetMapping("listHouse")
-//	public String listBook(Model model,@ModelAttribute("bean") PageBean bean) {
-//		model.addAttribute("list", houseService.searchAll(bean));
-//		return "house/housedeal";
-//	}
-	
-//	@GetMapping("searchHouse")
-//	public String searchBook(Model model, int no) {
-//		model.addAttribute("house", houseService.search(no));
-//		return "book/searchBook";
-//	}
-//	
-//	@GetMapping("insertBookForm.do")
-//	public String insertBookForm() {
-//		return "book/insertBook";
-//	}
-//	
-//	
-//	@GetMapping("removeBook.do")
-//	public String removeBook( String isbn) {
-//		bookService.delete(isbn);
-//		return "redirect:listBook.do";
-//	}
-//	
-//	
-//	@GetMapping("updateBookForm.do")
-//	public String insertBookForm(Model model, String isbn) {
-//		model.addAttribute("book", bookService.search(isbn));
-//		return "book/updateBook";
-//	}
-//	
-//	
-//	@PostMapping("updateBook.do")
-//	public String updateBook(Book book) {
-//		bookService.update(book);
-//		return "book/updateBook";
-//	}
-//	
-//	@PostMapping("insertBook.do")
-//	public String insertBook(Book book) {
-//		bookService.insert(book);
-//		return "redirect:searchBook.do?isbn="+book.getIsbn();
-//	}
-//	
-//	
-	
+	@ApiOperation(value="아파트 no와 일치하는 아파트 반환한다.",response = HouseDto.class)
+	@GetMapping(value="/apt/no/{no}")
+	public HouseDto getHouse(@PathVariable("no") int no) throws Exception{
+		return houseService.getHouse(no);
+	}
 }
 
 

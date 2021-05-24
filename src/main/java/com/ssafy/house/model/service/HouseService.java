@@ -9,9 +9,15 @@ import com.ssafy.house.model.PostDto;
 import com.ssafy.util.PageNavigation;
 
 public interface HouseService {
-	public List<HouseDto> listHouse(Map<String, String> map) throws Exception;
+	// 전체 list
+	public List<HouseDto> getHouseList();
 	
-	public HouseDto getHouse(int no) throws Exception;
-
-	PageNavigation makePageNavigation(Map<String, String> map) throws Exception;
+	// 아파트 이름 List
+	public List<HouseDto> getHouseAptNameList(String aptname);
+	
+	// 동 List 
+	public List<HouseDto> getHouseDongList(String dong);
+	
+	// 번호로 찾는 House
+	public HouseDto getHouse(int no);
 }

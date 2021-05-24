@@ -3,46 +3,28 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.house.model.mapper.HouseDao">
-	<select id="getHouse" parameterType="int" resultType="houseDto">
+	
+	<select id="listTotal" resultType="houseDto">
+		select *
+		from housedeal
+		order by no
+		limit 10
+	</select>
+	
+	<select id="listApt" parameterType="String" resultType="houseDto">
+		select * from housedeal
+		where AptName like concat('%',#{aptname},'%')
+		order by no
+	</select>
+	
+	<select id="listDong" parameterType="String" resultType="houseDto">
+		select * from housedeal
+		where dong like concat('%',#{dong},'%')
+		order by no
+	</select>
+	
+	<select id="houseDetail" parameterType="int" resultType="houseDto">
 		select * from housedeal
 		where no = #{no}
 	</select>
-	
-	<select id="listHouse" parameterType="map" resultType="houseDto">
-		select * from housedeal
-		<where>
-			<if test="key !='all' and word!=null and word!='' ">
-				<choose>
-					<when test="key=='AptName'"> 
-						AptName like concat('%',#{word},'%')
-					</when>
-					<otherwise>
-						dong like concat('%',#{word},'%')
-					</otherwise>
-				</choose>
-			
-			</if>
-		</where>
-		order by no
-		limit #{start}, #{spp}
-	</select>
-	
-	<select id="getTotalCount" parameterType="map" resultType="int">
-		select count(*) from housedeal
-		<where>
-			<if test="key !='all' and word!=null and word!='' ">
-				<choose>
-					<when test="key=='AptName'"> 
-						AptName like concat('%',#{word},'%')
-					</when>
-					<otherwise>
-						dong like concat('%',#{word},'%')
-					</otherwise>
-				</choose>
-			
-			</if>
-		</where>
-		
-	</select>
-	
 </mapper>
