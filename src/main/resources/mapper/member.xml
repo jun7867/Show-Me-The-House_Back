@@ -3,37 +3,59 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.house.model.mapper.MemberDao">
+	<!--  로그인 -->
+	<select id="login" resultType="memberDto">
+		select
+		user_no, user_id, name, pwd, email
+		from member
+		where user_id = #{user_id} and pwd = #{pwd}
+	</select>
 
-	<select id="login" parameterType="map" resultType="memberDto">
-		select username, userid, email
-		from member
-		where userid = #{userid} and userpwd = #{userpwd}
+	<!-- 회원 전체 조회 -->
+	<select id="selectMember" resultType="memberdto">
+		select user_no, user_id, name, pwd, email
+		  from member
+		 order by user_no
 	</select>
 	
-	<select id="userList" resultType="memberDto">
-		select userid, userpwd, username, email
-		from member
+	<!-- 회원 상세 조회 -->
+	<select id="selectMemberByNo" resultType="memberdto">
+		select user_no, user_id, name, pwd, email
+		  from member 
+		 where user_no = #{user_no}
 	</select>
 	
-	<select id="userInfo" parameterType="String" resultType="memberdto">
-		select userid, userpwd, username, email
-		from member
-		where userid = #{userid}
+	<!-- 회원 상세 조회 -->
+	<select id="selectMemberById" resultType="memberdto">
+		select user_no, user_id, name, pwd, email
+		  from member 
+		 where user_id = #{user_id}
 	</select>
-	
-	<insert id="userRegister" parameterType="MemberDto">
-		insert into member (userid, userpwd, username, email)
-		values (#{userid}, #{userpwd}, #{username}, #{email})
+
+	<!-- 회원 등록 -->
+	<insert id="insertMember" parameterType="memberdto">
+		insert into member(
+		user_id, name, pwd, email
+		) values (
+			#{user_id}, #{name}, #{pwd}, #{email}
+		)
 	</insert>
 	
-	<update id="userModify" parameterType="MemberDto">
-		update member
-		set userpwd = #{userpwd}, email = #{email}
-		where userid = #{userid}
+	<!-- 회원 수정 -->
+	<update id="updateMember" parameterType="memberdto">
+		update member 
+		   set	pwd = #{pwd},
+		   		user_id = #{user_id},
+		   		name = #{name},
+		   		email = #{email}
+		 where user_no = #{user_no}
 	</update>
-	
-	<delete id="userDelete" parameterType="String">
-		delete from member
-		where userid = #{userid}
+
+	<!-- 회원 삭제 -->
+	<delete id="deleteMember" parameterType="int">
+		delete 
+		  from member
+		 where user_no = #{user_no}
 	</delete>
 </mapper>
+

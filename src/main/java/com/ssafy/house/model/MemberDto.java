@@ -4,44 +4,46 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class MemberDto {
 	
-	private String userid;
-	
-	private String username;
-	
-	private String userpwd;
-	
+	private int user_no;
+	private String user_id;
+	private String name;
+	private String pwd;
 	private String email;
-
-	public String getUserid() {
-		return userid;
+	
+	public int getUser_no() {
+		return user_no;
 	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
-
-	public String getUsername() {
-		return username;
+	public String getUser_id() {
+		return user_id;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
-
-	public String getUserpwd() {
-		return userpwd;
+	public String getName() {
+		return name;
 	}
-
-	public void setUserpwd(String userpwd) {
-		this.userpwd = userpwd;
+	public void setName(String name) {
+		this.name = name;
 	}
-
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	@Override
+	public String toString() {
+		return "Member [user_no=" + user_no + ", user_id=" + user_id + ", name=" + name + ", pwd=" + pwd + ", email="
+				+ email + "]";
 	}
 
 }

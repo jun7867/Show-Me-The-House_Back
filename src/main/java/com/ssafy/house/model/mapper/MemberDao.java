@@ -10,16 +10,12 @@ import com.ssafy.house.model.MemberDto;
 
 @Mapper
 public interface MemberDao {
-	public MemberDto login(Map<String, String> map) throws SQLException;
-
-//	REST
-	public List<MemberDto> userList();
-
-	public MemberDto userInfo(String userid);
-
-	public int userRegister(MemberDto memberDto);
-
-	public int userModify(MemberDto memberDto);
-
-	public int userDelete(String userid);
+	public List<MemberDto> selectMember();
+	public MemberDto selectMemberByNo(int user_no);
+	public MemberDto selectMemberById(String user_id);
+	public int insertMember(MemberDto member);
+	public int updateMember(MemberDto member);
+	public int deleteMember(int user_no);
+	public int confirmeMember(String user_id);
+	public MemberDto login(MemberDto member);
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.house.model.mapper.HouseDao">
+	
+	<select id="listTotal" resultType="houseDto">
+		select *
+		from housedeal
+		order by no
+		limit 10
+	</select>
+	
+	<select id="listApt" parameterType="String" resultType="houseDto">
+		select * from housedeal
+		where AptName like concat('%',#{aptname},'%')
+		order by no
+	</select>
+	
+	<select id="listDong" parameterType="String" resultType="houseDto">
+		select * from housedeal
+		where dong like concat('%',#{dong},'%')
+		order by no
+	</select>
+	
+	<select id="houseDetail" parameterType="int" resultType="houseDto">
+		select * from housedeal
+		where no = #{no}
+	</select>
+</mapper>
