@@ -11,6 +11,13 @@
 		limit 10
 	</select>
 	
+	<select id="listNewest" resultType="houseDto">
+		select no, dong, AptName, dealAmount, buildYear, concat(dealYear, ".", dealMonth, ".", dealDay) as dealDate, floor
+		from housedeal
+		order by dealDate desc
+		limit 10;
+	</select>
+	
 	<select id="listApt" parameterType="String" resultType="houseDto">
 		select * from housedeal
 		where AptName like concat('%',#{aptname},'%')

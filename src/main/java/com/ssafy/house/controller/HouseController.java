@@ -47,6 +47,12 @@ public class HouseController {
 		return new ResponseEntity<List<HouseDto>>(houseService.getHouseList(),HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "최신 아파트 정보를 반환한다.", response = List.class)
+	@GetMapping(value = "/apt/newlist")
+	public ResponseEntity<List<HouseDto>> getNewestList() throws Exception{
+		return new ResponseEntity<List<HouseDto>>(houseService.getNewestList(),HttpStatus.OK);
+	}
+	
 	// 아파트 이름에 일치하는 아파트 정보 리스트
 	@ApiOperation(value = "아파트 이름과 일치하는 아파트 정보 리스트를 반환한다.", response = List.class)
 	@RequestMapping(value = "/apt/aptName/{aptName}", method = RequestMethod.GET, headers = { "Content-type=application/json" })

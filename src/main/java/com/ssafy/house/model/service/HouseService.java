@@ -12,6 +12,9 @@ public interface HouseService {
 	// 전체 list
 	public List<HouseDto> getHouseList();
 	
+	// 최신 매매 매물 목록
+	public List<HouseDto> getNewestList();
+	
 	// 아파트 이름 List
 	public List<HouseDto> getHouseAptNameList(String aptname);
 	

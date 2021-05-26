@@ -11,6 +11,10 @@ public interface HouseDao {
 	
 	// 전체 아파트 리스트 
 	public List<HouseDto> listTotal();
+	
+	// 최신 매매 아파트 리스트
+	public List<HouseDto> listNewest();
+	
 	// Apt name 리스트 
 	public List<HouseDto> listApt(String aptname);
 	// 동 리스트 

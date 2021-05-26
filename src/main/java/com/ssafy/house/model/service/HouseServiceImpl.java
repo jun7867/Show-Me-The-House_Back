@@ -34,5 +34,10 @@ public class HouseServiceImpl implements HouseService {
 		return house.houseDetail(no);
 	}
 
+	@Override
+	public List<HouseDto> getNewestList() {
+		return house.listNewest();
+	}
+
 
 }
