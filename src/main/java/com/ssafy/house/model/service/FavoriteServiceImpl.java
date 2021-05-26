@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.house.model.FavoriteDto;
+import com.ssafy.house.model.HouseDto;
+import com.ssafy.house.model.MemberDto;
 import com.ssafy.house.model.mapper.FavoriteDao;
 
 @Service
@@ -20,17 +22,25 @@ public class FavoriteServiceImpl implements FavoriteService {
 	@Autowired
 	private FavoriteDao dao;
 	
+	@Autowired
+	private SqlSession sqlSession;
+	
 	@Override
 	@Transactional
-	public List<FavoriteDto> listFavorite() throws Exception {
-
-		return dao.listFavorite();
+	public List<HouseDto> listFavorite(int user_no) throws Exception {
+		return dao.listFavorite(user_no);
 	}
 	
 	@Override
 	@Transactional
-	public void addFavorite(String dong, String userid) throws Exception {
-
-		dao.AddFavorite(dong, userid);
+	public boolean addFavorite(FavoriteDto fav) throws Exception {
+		return sqlSession.getMapper(FavoriteDao.class).addFavorite(fav) == 1;
+		
+	}
+	
+	@Override
+	@Transactional
+	public boolean deleteFavorite(int user_no, int housedeal_no) throws Exception {
+		return sqlSession.getMapper(FavoriteDao.class).deleteFavorite(user_no, housedeal_no) == 1;	
 	}
 }

@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.house.dao.FavoriteDao">
-		
+<mapper namespace="com.ssafy.house.model.mapper.FavoriteDao">
+
+	<!-- 관심 매물 정보 -->
+	<select id="listFavorite" parameterType="memberdto" resultType="houseDto">
+		select no, dong, AptName, dealAmount, buildYear, dealYear, dealMonth, dealDay, floor
+		from housedeal
+		where no in (select housedeal_no from favorite where user_no = ${user_no});
+	</select>
+	
+	<insert id="addFavorite" parameterType="favoriteDto">
+		insert into favorite(
+			user_no, housedeal_no
+		) values (
+			#{user_no}, #{housedeal_no}
+		)
+	</insert>
+	
+	<insert id="deleteFavorite" parameterType="int">
+		delete
+			from favorite
+			where user_no = #{user_no} and housedeal_no = #{housedeal_no}
+	</insert>
 </mapper>
