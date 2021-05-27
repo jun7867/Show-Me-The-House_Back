@@ -25,16 +25,12 @@ public class JwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	logger.info(request.getMethod() + " : " + request.getServletPath());
         
-        // option 요청은 바로 통과시켜주자.
         if (request.getMethod().equals("OPTIONS")) {
             return true;
         } else {
-            // request의 parameter에서 auth_token으로 넘어온 녀석을 찾아본다.
-            // String token = request.getParameter("auth_token");
             String token = request.getHeader("auth-token");
             System.out.println(token);
             if (token != null && token.length() > 0) {
-                // 유효한 토큰이면 진행, 그렇지 않으면 예외를 발생시킨다.
                 jwtService.checkValid(token);
                 logger.info("토큰 사용 가능 : {}", token);
                 return true;

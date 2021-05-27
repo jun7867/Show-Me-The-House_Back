@@ -7,8 +7,6 @@ import com.ssafy.house.model.MemberDto;
 
 public interface LoginService {
 	public MemberDto login(Map<String, String> map) throws Exception;
-	
-//	REST 
 	public List<MemberDto> userList();
 	public MemberDto userInfo(String userid);
 	public int userRegister(MemberDto memberDto);

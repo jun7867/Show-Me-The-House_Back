@@ -45,21 +45,21 @@ public class MemberController {
 	@Autowired
 	private JwtService jwtService;
 	
-	@ApiOperation(value = "모든 게시글의 정보를 반환한다.", response = List.class)
+	@ApiOperation(value = "모든 유저의 정보를 반환한다.", response = List.class)
 	@GetMapping
 	public ResponseEntity<List<MemberDto>> retrieveMember() throws Exception {
 		logger.debug("retrieveBoard - 호출");
 		return new ResponseEntity<List<MemberDto>>(memberService.retrieveMember(), HttpStatus.OK);
 	}
 
-    @ApiOperation(value = "글번호에 해당하는 게시글의 정보를 반환한다.", response = MemberDto.class)    
+    @ApiOperation(value = "번호에 해당하는 유저의 정보를 반환한다.", response = MemberDto.class)    
 	@GetMapping("{user_no}")
 	public ResponseEntity<MemberDto> detailMemberInfo(@PathVariable int user_no) {
 		logger.debug("detailMember - 호출");
 		return new ResponseEntity<MemberDto>(memberService.detailMember(user_no), HttpStatus.OK);
 	}
     
-    @ApiOperation(value = "글번호에 해당하는 게시글의 정보를 반환한다.", response = MemberDto.class)    
+    @ApiOperation(value = "아이디에 해당하는 유저의 정보를 반환한다.", response = MemberDto.class)    
 	@GetMapping("/id/{user_id}")
 	public ResponseEntity<MemberDto> detailMember(@PathVariable String user_id) {
 		logger.debug("detailMember - 호출");
@@ -75,18 +75,13 @@ public class MemberController {
 		try {
 			MemberDto loginUser = memberService.login(member);
 			if (loginUser != null) {
-				// jwt.io에서 확인
-				// 로그인 성공했다면 토큰을 생성한다.
 				String token = jwtService.create(loginUser);
 				logger.trace("로그인 토큰정보 : {}", token);
 
-//				토큰 정보는 response의 헤더로 보내고 나머지는 Map에 담는다.
-//				response.setHeader("auth-token", token);
 				resultMap.put("auth-token", token);
 				resultMap.put("user-id", loginUser.getUser_id());
 				resultMap.put("user-name", loginUser.getName());
 				resultMap.put("status", true);
-//				resultMap.put("data", loginUser);
 				status = HttpStatus.ACCEPTED;
 			} else {
 				resultMap.put("status", false);
@@ -105,13 +100,8 @@ public class MemberController {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = HttpStatus.ACCEPTED;
 		System.out.println("getinfo.........."+req.getHeader("auth-token"));
-//		System.out.println(">>>>>> " + jwtService.get(req.getHeader("auth-token")));
 		try {
-			// 사용자에게 전달할 정보이다.
-//			String info = memberService.getServerInfo();
 			resultMap.putAll(jwtService.get(req.getHeader("auth-token")));
-//			resultMap.put("status", true);
-//			resultMap.put("info", info);
 			status = HttpStatus.ACCEPTED;
 			System.out.println(status);
 		} catch (RuntimeException e) {
@@ -122,7 +112,7 @@ public class MemberController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 
-    @ApiOperation(value = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+    @ApiOperation(value = "새로운 유저 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@PostMapping
 	public ResponseEntity<String> writeMember(@RequestBody MemberDto member) {
 		logger.debug("writeMember - 호출");
@@ -132,7 +122,7 @@ public class MemberController {
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
 
-    @ApiOperation(value = "글번호에 해당하는 게시글의 정보를 수정한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+    @ApiOperation(value = "유저의 정보를 수정한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@PutMapping
 	public ResponseEntity<String> updateMember(@RequestBody MemberDto member) {
 		logger.debug("updateMember - 호출");
@@ -144,7 +134,7 @@ public class MemberController {
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 	}
 
-    @ApiOperation(value = "글번호에 해당하는 게시글의 정보를 삭제한다. 그리고 DB삭제 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+    @ApiOperation(value = "유저 번호에 해당하는 유저의 정보를 삭제한다. 그리고 DB삭제 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@DeleteMapping("{user_no}")
 	public ResponseEntity<String> deleteBoard(@PathVariable int user_no) {
 		logger.debug("deleteMember - 호출");

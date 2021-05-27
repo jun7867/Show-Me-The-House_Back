@@ -7,9 +7,7 @@ import com.ssafy.house.model.SidoGugunDongDto;
 public interface MapService {
 
 	List<SidoGugunDongDto> getSido();
-
 	List<SidoGugunDongDto> getGugunInSido(String sido);
-
 	List<SidoGugunDongDto> getDongInGugun(String gugun);
 	String getSiName(String sidocode);
 	String getGugunName(String guguncode);
